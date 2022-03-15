@@ -1,0 +1,87 @@
+:root{
+    --primary-color: #1d5888;
+    --secondary-color: #ff993b;
+    --dark-color: #292929;
+    --white-color: #e7e7e7;
+    --fizzPrimary-color:#9269f7;
+    --fizzSecondary-color:#75fcce;
+}
+
+.general{
+    color: #292929;
+}
+.fizz{
+    color: #75fcce;
+}
+.buzz{
+    color: #9269f7;
+}
+.fizzBuzz{
+    color: crimson;
+}
+body{
+    color:var(--dark-color);
+}
+nav{
+    background-color: var(--fizzPrimary-color);
+}
+.navbar-brand{
+    color: #75fcce;
+}
+nav .navbar-brand>a{
+    color:var(--fizzSecondary-color);
+    
+}
+footer{
+    background-color: var(--fizzPrimary-color);
+}
+h1,h2,h3,h4,h5,h6{
+    color: var(--dark-color);
+}
+
+main>.container {
+    padding: 60px 15px 0;
+}
+footer{
+    padding-right: 1rem;
+}
+footer .social>a{
+    color: var(--dark-color);
+    opacity: .75;
+}
+footer .social>a:hover{
+    opacity: 0.9;
+    color: var(--fizzSecondary-color) ;
+}
+
+.bsicon{
+    color: purple;
+}
+.jsicon{
+    color:rgb(226,211,4) ;
+}
+.html5icon{
+    color: orangered;
+}
+.csicon{
+    color:rgb(11,82,214) ;
+}
+.checklist >li i{
+    color: var(--fizzSecondary-color);
+}
+
+
+
+code[class*="language-"],
+        pre[class*="language-"] {
+            white-space: pre-wrap;
+            word-break: break-all;
+            word-wrap: break-word;
+        }
+
+
+footer .logo>img{
+    width: 40%;
+
+}
+

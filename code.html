@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en" class="h-100">
+
+<head>
+    <title>Fizz Buzz: A Coding Project By Joshua Wells</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/5db21ba9c6.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/site.css">
+    <link rel="stylesheet" href="css/prism.css">
+    <link rel="icon" type="image/png" href="img/favicon-32x32.png">
+
+</head>
+
+<body class="d-flex flex-column h-100">
+<!--Nav Section-->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top gx-2">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html"> <img src="img/codedbywellslogoonly.svg" class="d-inline-block align-text-top"
+                width="30" height="24" alt="Logo"> Fizz Buzz</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-5 mb-md-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="app.html">The App</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="code.html">The Code</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" target="_blank" href="https://github.com/wellsejoshua?tab=repositories">Git Repo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" target="_blank" href="https://wells-portfolio.netlify.app/">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--Main Section-->
+    <main class="flex-shrink-0">
+        <div class="container py-5 px-5 mt-5">
+            <h2 class="border-1 border-bottom border-dark ">The Code for Fizz Buzz</h2>
+            <div class="row row-cols-1 row-cols-lg-2">
+                <div class="col-lg-8">
+                    <pre class="line-numbers"><code class="language-javascript">
+                        //Controller Function
+function getValues(){
+    let fizzValue = document.getElementById("fizzValue").value;
+    let buzzValue = document.getElementById("buzzValue").value;
+    //validate input
+    fizzValue = parseInt(fizzValue);
+    buzzValue = parseInt(buzzValue);
+    let fizzBuzz = [];
+    //second step of validation
+    if(Number.isInteger(fizzValue) && Number.isInteger(buzzValue)){
+        //generate array with replaced values
+        let fizzBuzzArray = generateArray(fizzValue,buzzValue);
+        fizzBuzz = fizzBuzzArray;
+    }
+    else{
+        alert("You Must Enter Integers")
+    }
+    displayNumbers(fizzBuzz);
+}
+
+//Logic Function
+//GENERATE ARRAY
+function generateArray(fizzValue,buzzValue){
+    let fizzBuzzArray = [];
+    tempValue = 1;
+    for (let index = 0; index < 100; index++) {
+        if (tempValue % fizzValue == 0 && tempValue % buzzValue == 0) {
+            fizzBuzzArray[index] = "FizzBuzz";
+            tempValue++;
+        }
+        else if(tempValue % fizzValue == 0){
+            fizzBuzzArray[index] = "Fizz";
+            tempValue++;
+        }
+        else if(tempValue % buzzValue == 0){
+            fizzBuzzArray[index] = "Buzz";
+            tempValue++;
+        }
+        else{
+            fizzBuzzArray[index] = tempValue;
+            tempValue++;
+        }
+    }
+    return fizzBuzzArray;
+}
+
+//Display Function
+function displayNumbers(fizzBuzz){
+   //document.write(fizzBuzz);
+   let templateRows = "";
+   let count = 0;
+   let displayClasses =["Fizz", "Buzz", "FizzBuzz"];
+   //setting boolean to false, if the indexed value is included in displayClasses
+   //true value means alternate styling will be applied
+   let inDisplayClasses = "";
+   let className = "";
+   for (let index = 0; index < fizzBuzz.length; index++) {
+        let number = fizzBuzz[index];
+        inDisplayClasses = displayClasses.includes(number);
+        if (inDisplayClasses) {
+            className = lowercaseFirstLetter(number);
+            if (count == 0) {
+                templateRows += `<tr><td class="${className}">${number}</td>`
+                count++;
+            }
+            else if(count == 4){
+                templateRows += `<td class="${className}">${number}</td></tr>`
+                count = 0;
+            }
+            else{
+                templateRows += `<td class="${className}">${number}</td>`
+                count++;
+            }   
+        } 
+        else {
+            className = "general";
+            if (count == 0) {
+                templateRows += `<tr><td class="${className}">${number}</td>`
+                count++;
+            }
+            else if(count == 4){
+                templateRows += `<td class="${className}">${number}</td></tr>`
+                count = 0;
+            }
+            else{
+                templateRows += `<td class="${className}">${number}</td>`
+                count++;
+            } 
+        }
+
+
+   }
+
+   document.getElementById("results").innerHTML = templateRows;
+}
+
+function lowercaseFirstLetter(word){
+    return word.charAt(0).toLowerCase() + word.slice(1);
+}
+                        </code>
+                    </pre>
+                </div>
+                <div class="col-lg-4">
+                    <p>The Code is structured into 4 functions.</p>
+                    <h5>getValues()</h5>
+                    <p>getValues() is the controller function. Function gets the values from the user. 
+                        Function calls generateArray() to produce an array of values from 1-100. 
+                            </p>
+                    <h5>generateArray()</h5>
+                    <p>Produces an array of values from 1-100 replacing the values divisible the fizz value and buzz value by "FizzBuzz", 
+                        by the fizz value only with "Fizz", and by buzz value only with "Buzz".</p>
+                    <h5>displayNumbers()</h5>
+                    <p>Formats generated array based on values with differenet styling. 
+                        Calls lowercaseFirstLetter to assign case appropriate className for styling.</p>
+                    <h5>lowercaseFirstLetter()</h5>
+                    <p>Converts the first letter to lowercase.</p>
+                    
+                </div>
+            </div>
+            
+        </div>
+    </main>
+    <!--Footer Section-->
+    <footer class="footer mt-auto py-3">
+        <div class="container-fluid">
+            <div class="row row-cols-1 row-cols-lg-3 gy-2">
+                <div class="col order-last order-lg-first general">
+                    <div> <span>&copy;2022</span> Joshua Wells | wellsejoshua@outlook.com</div>   
+                </div>
+                <div class="col logo d-flex align-items-center justify-content-start justify-content-lg-center">
+                    <img src="/img/codedbywellsresize2.svg" alt="Joshua Wells Logo"> 
+                    
+
+                </div>
+                <!--d-flex makes the column take up the least amount of space; align-items-center is vertcal alignment; justify-content-end is left to right alignment this only works with flex box-->
+                <div class="col d-flex align-items-center justify-content-start justify-content-lg-end">
+                    <div class="row">
+                        <div class="col social"><a href="https://www.linkedin.com/in/joshua-e-wells-b40b35229/" target="_blank"> <i class="fab fa-linkedin fa-2x"></i></a></div>
+                        <div class="col social"><a href="https://github.com/wellsejoshua?tab=repositories" target="_blank"> <i class="fab fa-github fa-2x"></i></a></div>
+                        <div class="col social"><a href="https://twitter.com/CodedByWells" target="_blank"> <i class="fab fa-twitter fa-2x"></i></a></div>
+                        <div class="col social"><a href="https://www.youtube.com/channel/UCdgFnnYSQwzzkbK6sOz-csQ/videos" target="_blank"> <i class="fab fa-youtube fa-2x"></i></a></div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </footer>
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">
+    </script>
+    <script src="js/prism.js"></script>
+    <script>
+        Prism.plugins.NormalizeWhitespace.setDefaults({
+            'remove-trailing': true,
+            'remove-indent': true,
+            'left-trim': true,
+            'right-trim': true
+        })
+    </script>
+
+
+</body>
+</html>
